@@ -1,0 +1,30 @@
+@model List<Presentacion.ModelViews.ProveedorView>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2 class="text-center my-4">Proveedor List</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ProveedorId</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Born Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var proveedor in Model)
+            {
+                <tr>
+                    <td>@proveedor.ProveedorId</td>
+                    <td>@proveedor.FirstName</td>
+                    <td>@proveedor.LastName</td>
+                    <td>@proveedor.BornDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
