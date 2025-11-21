@@ -1,35 +1,27 @@
-using System.Diagnostics;
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Presentacion.Interfaces;
 
-
-namespace Presentacion.Controllers;
-
-public class HomeController : Controller
+namespace Presentacion.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly ICustomRepository _customRepository;
-
-    public HomeController(ILogger<HomeController> logger, ICustomRepository customRepository)
+    public class HomeController : Controller
     {
-        _logger = logger;
-        _customRepository = customRepository;
+        private readonly ICustomRepository customRepository;
+
+        public HomeController(ICustomRepository customRepository)
+        {
+            this.customRepository = customRepository;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var custom = await customRepository.CustomList();
+            return View(custom);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
-
-    public IActionResult Index()
-    {
-        var customs = _customRepository.CustomList();
-        return View(customs);
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    /*[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }*/
 }

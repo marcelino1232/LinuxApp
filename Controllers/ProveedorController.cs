@@ -1,21 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Presentacion.Interfaces;
 
-namespace Presentacion.Controllers;
-
-public class ProveedorController: Controller
+namespace Presentacion.Controllers
 {
-    private readonly IProveedorRepository _proveedorRepository;
-
-    public ProveedorController(IProveedorRepository proveedorRepository)
+    public class ProveedorController : Controller
     {
-        _proveedorRepository = proveedorRepository;
-    }
+        private readonly IProveedorRepository proveedorRepository;
 
-    
-    public IActionResult Index()
-    {
-        var proveedores = _proveedorRepository.GetAllProveedores();
-        return View(proveedores);
+        public ProveedorController(IProveedorRepository proveedorRepository)
+        {
+            this.proveedorRepository = proveedorRepository;
+        }
+        // GET: ProveedorController
+        public ActionResult Index()
+        {
+            var proveedores = proveedorRepository.GetAllProveedores();
+            return View(proveedores);
+        }
+
     }
 }

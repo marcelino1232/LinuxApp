@@ -7,7 +7,7 @@ namespace Presentacion.Interfaces;
 
 public interface ICustomRepository
 {
-    List<CustomView> CustomList();
-    bool AddCustom(CustomView custom);
+    Task<List<CustomView>> CustomList();
+    Task<bool> AddCustom(CustomView custom);
     
 }
